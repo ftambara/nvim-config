@@ -29,3 +29,7 @@ vim.opt.isfname:append('@-@')
 
 -- Vertical guidelines
 vim.opt.colorcolumn = '80,88'
+
+-- Smart search case sensitivity
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
