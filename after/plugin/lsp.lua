@@ -1,4 +1,4 @@
-local lsp_zero = require('lsp-zero')
+local lsp_zero = require("lsp-zero")
 
 -- Keybindings
 lsp_zero.on_attach(function(client, bufnr)
@@ -8,24 +8,34 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 -- Mason
-require('mason').setup({})
-require('mason-lspconfig').setup({
+require("mason").setup({})
+require("mason-lspconfig").setup({
 	ensure_installed = {},
 	handlers = {
 		lsp_zero.default_setup,
 	},
 })
 
-local lspconfig = require('lspconfig')
+local lspconfig = require("lspconfig")
+
+lspconfig.clangd.setup({
+  name = "clangd",
+  cmd = {"clangd", "--background-index", "--clang-tidy", "--log=verbose"},
+  initialization_options = {
+    fallback_flags = { "-std=c++17" },
+  },
+})
+
 lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {
 			diagnostics = {
-				globals = { 'vim' },
+				globals = { "vim" },
 			},
 		},
 	},
 })
+
 lspconfig.gopls.setup({
   settings = {
     gopls = {
@@ -34,6 +44,56 @@ lspconfig.gopls.setup({
       },
       staticcheck = true,
       gofumpt = true,
+    },
+  },
+})
+
+lspconfig.racket_langserver.setup({
+  cmd = { "racket", "--lib", "racket-langserver"},
+  filetypes = { "racket" },
+})
+
+lspconfig.pyright.setup({
+  settings = {
+    pyright = {
+      -- Using Ruff's import organizer
+      disableOrganizeImports = true,
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        -- ignore = { '*' },
+      },
+    },
+  },
+})
+
+lspconfig.ruff.setup({
+    init_options = {
+        settings = {
+            lint = {
+                enable = true,
+                preview = true,
+            },
+            format = {
+                preview = true,
+            },
+        },
+    },
+})
+
+lspconfig.yamlls.setup({
+  settings = {
+    yaml = {
+      format = {
+        enable = true,
+        singleQuote = false,
+      },
+      validate = true,
+      completion = true,
+      editor = {
+        tabSize = 4,
+      },
     },
   },
 })

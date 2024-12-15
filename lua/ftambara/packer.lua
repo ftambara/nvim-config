@@ -35,5 +35,4 @@ return require('packer').startup(function(use)
 	}
 	use 'mfussenegger/nvim-lint'
 	use 'mhartington/formatter.nvim'
-    use 'github/copilot.vim'
 end)
