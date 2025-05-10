@@ -2,6 +2,7 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("my_nvim_" .. name, { clear = true })
 end
 
+-- LSP
 local completion = vim.g.completion_mode or "blink" -- or "native"
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
