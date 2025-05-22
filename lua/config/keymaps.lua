@@ -16,12 +16,13 @@ map("n", "N", "Nzzzv")
 -- Don't lose your register
 map("x", "<leader>p", [["_dP]])
 
-map({"n", "v"}, "<leader>y", [["+y]])
+map({ "n", "v" }, "<leader>y", [["+y]])
 map("n", "<leader>Y", [["+Y]])
 
-map({"n", "v"}, "<leader>d", [["_d]])
+map({ "n", "v" }, "<leader>d", [["_d]])
 
 -- Git
 map("n", "<leader>gs", "<cmd>Git<CR>")
+map("n", "<leader>gb", "<cmd>Git blame<CR>")
 map("n", "go", "<cmd>diffget //3<CR>")
 map("n", "ga", "<cmd>diffget //2<CR>")
